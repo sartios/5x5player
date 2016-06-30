@@ -103,7 +103,12 @@ angular.module('app',['player', 'team','field','ngRoute'])
             return field;
           }]
       }
-    })
+    });
+
+    $routeProvider.when("/companies", {
+      templateUrl: 'partials/field/companies.html',
+      controller: 'CompanyListController'
+    });
 
     $routeProvider.otherwise("/teams");
   });
