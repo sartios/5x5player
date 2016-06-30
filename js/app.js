@@ -130,6 +130,21 @@ angular.module('app',['player', 'team','field','ngRoute'])
       }
     });
 
+    $routeProvider.when("/company/:id/fields", {
+      templateUrl: 'partials/field/company-fields.html',
+      controller: 'CompanyFieldsListController',
+      resolve:{
+        selectedCompany:['CompanyService', '$route', '$location',
+        function(CompanyService, $route, $location){
+          var company = CompanyService.getById($route.current.params.id);
+          if(!company){
+            $location.path("/companies");
+          }
+          return company;
+        }]
+      }
+    });
+
     $routeProvider.otherwise("/teams");
   });
 

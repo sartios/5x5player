@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h2>Company Fields</h2>
+  </div>
+  <div class="col-sm-6 table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="field in company.fields">
+          <td>{{field.id}}</td>
+          <td>{{field.name}}</td>
+          <td>{{field.size}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -7,7 +7,7 @@ angular.module('field')
     };
 
     $scope.viewFields = function(company){
-      $location.path('/fields');
+      $location.path('/company/'+company.id+'/fields/');
     }
 
     $scope.deleteCompany = function(company){
@@ -79,5 +79,15 @@ angular.module('field')
         fields: []
       });
     };
+    init();
+  }]);
+
+angular.module('field')
+  .controller('CompanyFieldsListController', ['$scope', 'selectedCompany', function($scope, selectedCompany){
+
+    var init = function(){
+      $scope.company = selectedCompany;
+    };
+
     init();
   }]);
