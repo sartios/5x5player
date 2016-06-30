@@ -1,5 +1,6 @@
 angular.module('field')
-  .factory('CompanyService', ['Company','Field', function(Company,Field){
+  .factory('CompanyService', ['Company','Field','FieldService',
+   function(Company,Field,FieldService){
     var service = {};
     var companies = [];
 
@@ -7,6 +8,9 @@ angular.module('field')
       if(company.name){
         company.id = companies.length + 1;
         companies.push(company);
+        angular.forEach(company.fields, function(field, index){
+          FieldService.create(field);
+        });
       }
       return company;
     };
@@ -15,9 +19,19 @@ angular.module('field')
       angular.forEach(companies, function(e, index){
         if(e.id === company.id){
           companies[index] = company;
+          updateFields(company);
         }
       });
       return company;
+    };
+
+    var updateFields = function(company){
+      var newFields = company.fields.filter(function(field){
+        return field.id===undefined;
+      });
+      angular.forEach(newFields, function(field, index){
+        FieldService.create(field);
+      });
     };
 
     service.delete = function(companyId){

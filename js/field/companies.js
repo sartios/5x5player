@@ -6,6 +6,10 @@ angular.module('field')
       $location.path('/company/edit/' + company.id);
     };
 
+    $scope.viewFields = function(company){
+      $location.path('/fields');
+    }
+
     $scope.deleteCompany = function(company){
       CompanyService.delete(company.id);
     };
@@ -33,7 +37,7 @@ angular.module('field')
 
     $scope.addField = function(){
       $scope.company.fields.push(new Field({
-        id: $scope.company.fields.length + 1
+        company: $scope.company
       }));
     };
 
@@ -61,7 +65,7 @@ angular.module('field')
 
     $scope.addField = function(){
       $scope.company.fields.push(new Field({
-        id: $scope.company.fields.length + 1
+        company: $scope.company
       }));
     };
 

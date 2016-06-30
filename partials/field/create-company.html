@@ -17,11 +17,28 @@
           <span ng-if="company.fields.length==0" class="glyphicon glyphicon-plus" ng-click="addField()"></span>
         </label>
       </div>
-      <div ng-repeat="field in company.fields" class="form-group">
-        <input id="{{'fieldName_'+field.id}}" ng-model="field.name" />
-        <input id="{{'fieldId_'+field.id}}" type="number" ng-model="field.id"/>
-        <span class="glyphicon glyphicon-plus" ng-click="addField()"></span>
-        <span class="glyphicon glyphicon-minus" ng-click="deleteField(field)"></span>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>A/A</th>
+              <th>Name</th>
+              <th>Size</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="field in company.fields">
+              <td>{{$index}}</td>
+              <td><input type="text" id="{{'fieldName_'+$index}}" class="form-control" ng-model="field.name"/></td>
+                <td><input type="number" id="{{'fieldSize'+$index}}" class="form-control" ng-model="field.size"/></td>
+              <td>
+                <span class="glyphicon glyphicon-plus" ng-click="addField()"></span>
+                <span class="glyphicon glyphicon-minus" ng-click="deleteField(field)"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="form-group">
         <button name="createCompany" class="btn btn-primary pull-right" ng-click="createCompany()">Create</button>
