@@ -31,6 +31,24 @@ angular.module('field')
       if(companyIndex >= 0) companies.splice(companyIndex, 1);
     };
 
+    service.deleteField = function(company, field){
+      var companyIndex;
+      angular.forEach(companies, function(e, index){
+        if(e.id == company.id){
+          companyIndex = index;
+        }
+      });
+      if(companyIndex >= 0){
+        var fieldIndex;
+        angular.forEach(companies[companyIndex].fields, function(e, index){
+          if(e.id == field.id){
+            fieldIndex = index;
+          }
+        });
+        if(fieldIndex >= 0) companies[companyIndex].fields.splice(fieldIndex, 1);
+      }
+    };
+
     service.getAll = function(){
       return companies;
     };
@@ -128,6 +146,10 @@ angular.module('field')
       return fields.filter(function(field){
         return field.company.id == companyId;
       });
+    };
+
+    service.generateId = function(){
+      return fields.length + 1;
     };
 
     var setupFields = function(){
