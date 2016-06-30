@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-sm-12">
+  <h2>Create Team</h2>
+  </div>
+  <form name="formNewTeam" novalidate class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="teamName">Team Name</label>
+        <input class="form-control" type="text" id="teamName" ng-model="formNewTeam.name" placeholder="Entery team's name"/>
+      </div>
+      <div class="form-group">
+        <label for="teamLocation">Team Location</label>
+        <input class="form-control" type="text" id="teamLocation" ng-model="formNewTeam.location" placeholder="Entery team's location"/>
+      </div>
+      <div class="form-group">
+        <label>Add players: <span class="glyphicon glyphicon-search"></span></label>
+      </div>
+      <button class="btn btn-primary pull-right" ng-click="createTeam()">Save</button>
+    </div>
+  </form>
+</div>

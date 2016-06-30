@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h2>Fields</h2>
+  </div>
+  <div class="col-sm-6 table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Company</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="field in fields">
+          <td>{{field.id}}</td>
+          <td>{{field.name}}</td>
+          <td>{{field.size}}</td>
+          <td>{{field.company.name}}</td>
+          <td><span class="glyphicon glyphicon-edit" ng-click='editField(field)'></span>
+          <span class="glyphicon glyphicon-trash" ng-click='deleteField(field)'></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

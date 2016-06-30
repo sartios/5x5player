@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-sm-12">
+      <h3>Propose A Game</h3>
+  </div>
+  <div class="col-sm-12">
+    <form class="form row" novalidate name="formLocation">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="selectLocation">Select location: </label>
+          <select ng-model="formLocation.location" ng-options="x for x in locations"></select>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-6 table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Team</th>
+          <th>Day</th>
+          <th>Time</th>
+          <th>Level</th>
+          <th>Play</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="team in availableTeams | filter: formLocation.location">
+          <td>{{team.name}}</td>
+          <td>{{team.day}}</td>
+          <td>{{team.time}}</td>
+          <td>{{team.level}}</td>
+          <td><span ng-click="proposeGame(team)" class="glyphicon glyphicon-play-circle"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
