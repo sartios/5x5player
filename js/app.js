@@ -98,7 +98,7 @@ angular.module('app',['player', 'team','field','ngRoute'])
           function(FieldService, $route, $location){
             var field = FieldService.getById($route.current.params.id);
             if(!field){
-              $location.path("fields");
+              $location.path("/fields");
             }
             return field;
           }]
@@ -108,6 +108,21 @@ angular.module('app',['player', 'team','field','ngRoute'])
     $routeProvider.when("/companies", {
       templateUrl: 'partials/field/companies.html',
       controller: 'CompanyListController'
+    });
+
+    $routeProvider.when("/company/edit/:id", {
+      templateUrl: 'partials/field/update-company.html',
+      controller: 'CompanyEditController',
+      resolve:{
+        selectedCompany:['CompanyService', '$route', '$location',
+        function(CompanyService, $route, $location){
+          var company = CompanyService.getById($route.current.params.id);
+          if(!company){
+            $location.path("/companies");
+          }
+          return company;
+        }]
+      }
     });
 
     $routeProvider.otherwise("/teams");

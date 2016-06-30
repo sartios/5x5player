@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h2>Update Company</h2>
+  </div>
+  <div class="col-sm-6">
+    <form name="formCompany" role="form" novalidate>
+      <div class="form-group">
+        <label for="companyName">Company Name:</label>
+        <input id="companyName" type="text" class="form-control" ng-model="company.name"/>
+      </div>
+      <div class="form-group">
+        <label for="companyLocation">Company Location:</label>
+        <input id="companyLocation" type="text" class="form-control" ng-model="company.location"/>
+      </div>
+      <div class="form-group">
+        <label for="companyFields">Company Fields:<span class="glyphicon glyphicon-search"></span></label>
+      </div>
+      <div class="form-group">
+        <button name="updateCompany" class="btn btn-primary pull-right" ng-click="updateCompany()">Update</button>
+      </div>
+    </form>
+  </div>
+</div>

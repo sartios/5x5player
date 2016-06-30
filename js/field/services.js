@@ -35,6 +35,16 @@ angular.module('field')
       return companies;
     };
 
+    service.getById = function(companyId){
+      var company;
+      angular.forEach(companies, function(e, index){
+        if(e.id == companyId){
+          company = angular.copy(companies[index]);
+        }
+      });
+      return company;
+    };
+
     var setupCompanies = function(){
       companies.push(new Company({
         id: 1,
