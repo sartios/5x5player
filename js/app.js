@@ -110,6 +110,11 @@ angular.module('app',['player', 'team','field','ngRoute'])
       controller: 'CompanyListController'
     });
 
+    $routeProvider.when("/company/new", {
+      templateUrl: 'partials/field/create-company.html',
+      controller: 'CompanyCreateController'
+    });
+
     $routeProvider.when("/company/edit/:id", {
       templateUrl: 'partials/field/update-company.html',
       controller: 'CompanyEditController',

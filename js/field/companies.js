@@ -32,3 +32,16 @@ angular.module('field')
 
     init();
   }]);
+
+angular.module('field')
+  .controller('CompanyCreateController', ['$scope', '$location', 'CompanyService',
+  function($scope, $location, CompanyService){
+
+    $scope.createCompany = function(){
+      CompanyService.create($scope.company);
+      $location.path('/companies');
+    };
+
+    var init = function(){};
+    init();
+  }]);
