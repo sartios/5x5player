@@ -1,4 +1,4 @@
-angular.module('app',['player', 'team','field','user','ngRoute'])
+angular.module('app',['player', 'team','field','user','invitation','ngRoute'])
   .config(function($routeProvider){
 
     $routeProvider.when("/home", {
@@ -12,4 +12,5 @@ angular.module('app',['player', 'team','field','user','ngRoute'])
 
   });
 
-  angular.module('user',[]);
+angular.module('user',[]);
+angular.module('invitation',[]);

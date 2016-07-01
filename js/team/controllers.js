@@ -73,7 +73,9 @@ angular.module('team').controller('TeamEditController', ['$scope','$location','$
 
 angular.module('team')
   .controller('TeamViewController',['$scope', '$location', 'selectedTeam','PlayerPostService','FieldService',
-  function($scope, $location, selectedTeam, PlayerPostService, FieldService){
+  'PlayGameInvitationService','JoinTeamInvitationService',
+  function($scope, $location, selectedTeam, PlayerPostService,
+     FieldService, PlayGameInvitationService, JoinTeamInvitationService){
 
     $scope.update = function(){
       var post = $scope.post;
@@ -83,8 +85,24 @@ angular.module('team')
       $location.path('/home');
     };
 
+    $scope.viewPlayGameInvitations = function(){
+      $location.path('/play-game-invitations/' + selectedTeam.id);
+    };
+
+    var initPlayGameInvitations = function(){
+      var invitations = PlayGameInvitationService.getTeamInvitations(selectedTeam.id);
+      $scope.playGameInvitations = invitations.length;
+    };
+
+    var initPlayerInvitations = function(){
+      var invitations = JoinTeamInvitationService.getByTeam(selectedTeam.id);
+      $scope.playerInvitations = invitations.length;
+    };
+
     var init = function(){
       $scope.team = selectedTeam;
+      initPlayGameInvitations();
+      initPlayerInvitations();
     };
 
     init();

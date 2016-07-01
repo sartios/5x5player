@@ -111,3 +111,13 @@ angular.module('app')
     }
     return PlayerPost;
   });
+
+angular.module('app')
+  .factory('PlayGameInvitation', function(){
+    function PlayGameInvitation(args){
+      this.id = args.id,
+      this.gamePost = args.gamePost,
+      this.team = args.team
+    }
+    return PlayGameInvitation;
+  });

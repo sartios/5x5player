@@ -1,8 +1,10 @@
 angular.module('user')
   .controller('HomeController', ['$scope','GamePostService','PlayerPostService',
   'JoinTeamInvitation','JoinTeamInvitationService','TeamService','PlayerService',
+  'PlayGameInvitationService', 'PlayGameInvitation',
   function($scope,GamePostService, PlayerPostService,
-    JoinTeamInvitation, JoinTeamInvitationService, TeamService, PlayerService){
+    JoinTeamInvitation, JoinTeamInvitationService,
+    TeamService, PlayerService, PlayGameInvitationService, PlayGameInvitation){
 
     var teamId;
     var location;
@@ -19,7 +21,12 @@ angular.module('user')
     };
 
     $scope.play = function(post){
-      
+      var team = TeamService.get(teamId);
+      PlayGameInvitationService.create(new PlayGameInvitation({
+        gamePost: post,
+        team: team
+      }));
+      post.invitationSended = true;
     };
 
     $scope.join = function(post){

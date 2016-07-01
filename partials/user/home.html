@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="post in gamePosts">
+        <tr ng-repeat="post in gamePosts" ng-if="post.invitationSended === undefined">
           <td>{{post.team.name}}</td>
           <td>{{post.team.players.length}}</td>
           <td>{{post.field.name}}</td>
