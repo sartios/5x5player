@@ -19,9 +19,11 @@ angular.module('app')
       this.awayTeam = args.awayTeam,
       this.location = args.location,
       this.time = args.time,
-      this.score = args.score
+      this.score = args.score,
+      this.day = args.day
     }
-    return Game
+    
+    return Game;
   });
 
 angular.module('app')

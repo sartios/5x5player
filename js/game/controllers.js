@@ -1,4 +1,4 @@
-angular.module('team')
+angular.module('game')
   .controller('ProposeGameController',['$scope', 'GameService', 'TeamService','Game','Team',
 function($scope, GameService, TeamService, Game, Team){
 
@@ -39,7 +39,7 @@ function($scope, GameService, TeamService, Game, Team){
 
 }]);
 
-angular.module('team')
+angular.module('game')
   .controller('MyGamesHistoryController', ['$scope', 'GameService', function($scope, GameService){
 
     var buildHomeGames = function(){
@@ -58,7 +58,7 @@ angular.module('team')
     init();
   }]);
 
-angular.module('team')
+angular.module('game')
   .controller('FutureGamesController', ['$scope', 'GameService', function($scope, GameService){
 
     var init = function(){

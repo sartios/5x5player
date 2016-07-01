@@ -8,6 +8,7 @@
         <tr>
           <th>Home</th>
           <th>Away</th>
+          <th>Day</th>
           <th>Time</th>
           <th>Location</th>
         </tr>
@@ -16,6 +17,7 @@
         <tr ng-repeat="game in games">
           <td>{{game.homeTeam.name}}</td>
           <td>{{game.awayTeam.name}}</td>
+          <td>{{game.day}}</td>
           <td>{{game.time}}</td>
           <td>{{game.location}}</td>
         </tr>

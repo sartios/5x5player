@@ -1,4 +1,4 @@
-angular.module('team')
+angular.module('game')
   .factory('GameService', ['Game','Score', 'Team',
     function(Game, Score, Team){
 
@@ -6,11 +6,11 @@ angular.module('team')
     var games=[];
 
     service.create = function(game){
-      console.log('create('+game+')');
       if(game.awayTeam&&game.homeTeam){
+        game.id = games.length + 1;
         games.push(game);
-        return game;
       }
+      return game;
     };
 
     service.update = function(game){
@@ -195,7 +195,7 @@ angular.module('team')
     return service;
   }]);
 
-angular.module('team')
+angular.module('game')
   .factory('GamePostService', ['GamePost','Team','Field','TeamService','FieldService',
   function(GamePost, Team, Field, TeamService, FieldService){
 
