@@ -47,7 +47,11 @@ angular.module('app')
     function Player(args){
       this.id = args.id,
       this.name = args.name,
-      this.positions = args.positions
+      this.positions = args.positions,
+      this.available = function(){
+        return args.available;
+      },
+      this.number = args.number
     }
     return Player;
   });
@@ -93,4 +97,17 @@ angular.module('app')
       this.time = args.time
     }
     return GamePost;
+  });
+
+angular.module('app')
+  .factory('PlayerPost', function(){
+    function PlayerPost(args){
+      this.id = args.id,
+      this.playersNeeded = args.playersNeeded,
+      this.team = args.team,
+      this.field = args.field,
+      this.day = args.day,
+      this.time = args.time
+    }
+    return PlayerPost;
   });

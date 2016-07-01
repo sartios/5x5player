@@ -1,6 +1,11 @@
 angular.module('team').controller('TeamListController', ['$scope','$location','TeamService',
  function($scope,$location,TeamService){
 
+   $scope.viewTeam = function(team){
+     console.log('viewTeam()');
+     $location.path('/team/view/'+ team.id);
+   };
+
   $scope.editTeam = function(team){
     console.log('editTeam()');
     $location.path('/team/edit/' + team.id);
@@ -65,3 +70,23 @@ angular.module('team').controller('TeamEditController', ['$scope','$location','$
   };
   init();
 }]);
+
+angular.module('team')
+  .controller('TeamViewController',['$scope', '$location', 'selectedTeam','PlayerPostService','FieldService',
+  function($scope, $location, selectedTeam, PlayerPostService, FieldService){
+
+    $scope.update = function(){
+      var post = $scope.post;
+      post.team = $scope.team;
+      post.field = FieldService.getById(post.field.id);
+      PlayerPostService.create(post);
+      $location.path('/home');
+    };
+
+    var init = function(){
+      $scope.team = selectedTeam;
+    };
+
+    init();
+
+  }]);

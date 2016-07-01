@@ -1,5 +1,6 @@
 angular.module('team')
-  .factory('TeamService', ['Team', function(Team){
+  .factory('TeamService', ['Team','PlayerService',
+  function(Team, PlayerService){
     var service = {};
     var teams = [];
 
@@ -63,11 +64,16 @@ angular.module('team')
     };
 
     var setupInitialTeams = function(){
+      var players = [];
+      players.push(PlayerService.getById(1));
+      players.push(PlayerService.getById(2));
+      players.push(PlayerService.getById(3));
+
       teams.push(new Team({
         id: 1,
         name: 'Team 1',
         location: 'City 1',
-        players: [1,2,3,4,5],
+        players: players,
         level: 'Beginer'
       }));
 
@@ -75,7 +81,7 @@ angular.module('team')
         id: 2,
         name: 'Team 2',
         location: 'City 2',
-        players: [5,6,2,7,1],
+        players: players,
         level: 'Beginer'
       }));
 
@@ -83,14 +89,14 @@ angular.module('team')
         id: 3,
         name: 'Team 3',
         location: 'City 3',
-        players: [5,6,2,7,1],
+        players: players,
         level: 'intermediate'
       }));
     };
 
     var init = function(){
       setupInitialTeams();
-    }
+    };
     init();
 
     return service;

@@ -55,4 +55,20 @@ angular.module('team',['ngRoute'])
       templateUrl: 'partials/team/my-teams.html',
       controller: 'TeamController'
     });
+
+    $routeProvider.when("/team/view/:id",{
+      templateUrl: 'partials/team/team.html',
+      controller: 'TeamViewController',
+      resolve:{
+        selectedTeam : ['TeamService', '$route','$location',
+        function(TeamService, $route, $location){
+          var team = TeamService.get($route.current.params.id);
+          if(!team){
+            $location.path('/teams');
+          }
+          return team;
+        }],
+      }
+    });
+
   });

@@ -1,13 +1,18 @@
 angular.module('user')
-  .controller('HomeController', ['$scope','GamePostService',
-  function($scope,GamePostService){
+  .controller('HomeController', ['$scope','GamePostService','PlayerPostService',
+  function($scope,GamePostService, PlayerPostService){
 
     var teamId;
     var location;
 
     var initCityGamePostings = function(){
-      $scope.posts = GamePostService.getFutureGamePosts(teamId, location);
-      console.log('Found ' + $scope.posts.length + ' posts');
+      $scope.gamePosts = GamePostService.getFutureGamePosts(teamId, location);
+      console.log('Found ' + $scope.gamePosts.length + ' game posts');
+    };
+
+    var initPlayerPostings = function(){
+      $scope.playerPosts = PlayerPostService.getFuturePlayerPosts(location);
+      console.log('Found ' + $scope.playerPosts.length + ' player posts');
     };
 
     $scope.play = function(){
@@ -18,6 +23,7 @@ angular.module('user')
       teamId = 5;
       location = 'City 1';
       initCityGamePostings();
+      initPlayerPostings();
     };
 
     init();

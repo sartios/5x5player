@@ -16,7 +16,7 @@
       <tbody>
         <tr ng-repeat="team in teams">
           <td>{{team.id}}</td>
-          <td>{{team.name}}</td>
+          <td><span ng-click="viewTeam(team)">{{team.name}}</span></td>
           <td>{{team.location}}</td>
           <td>{{team.players.length}}</td>
           <td><span class="glyphicon glyphicon-edit" ng-click='editTeam(team)'></span>
