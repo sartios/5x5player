@@ -7,7 +7,7 @@ function(Team, Player, JoinTeamInvitation){
   service.create = function(invitation){
     if(invitation.team && invitation.player){
       invitation.id = invitations.length + 1;
-      invitation.push(invitation);
+      invitations.push(invitation);
     }
     return invitation;
   };

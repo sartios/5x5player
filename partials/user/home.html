@@ -23,7 +23,7 @@
           <td>{{post.day}}</td>
           <td>{{post.time}}</td>
           <td>
-            <span class="glyphicon glyphicon-play" ng-click="play()"></span>
+            <span class="glyphicon glyphicon-play" ng-click="play(post)"></span>
           </td>
         </tr>
       </tbody>
@@ -43,14 +43,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="post in playerPosts">
+        <tr ng-repeat="post in playerPosts" ng-if="post.joined===undefined">
           <td>{{post.team.name}}</td>
           <td>{{post.playersNeeded}}</td>
           <td>{{post.field.name}}</td>
           <td>{{post.day}}</td>
           <td>{{post.time}}</td>
           <td>
-            <span class="glyphicon glyphicon-play" ng-click="play()"></span>
+            <span class="glyphicon glyphicon-ok" ng-click="join(post)"></span>
           </td>
         </tr>
       </tbody>
