@@ -1,12 +1,15 @@
-angular.module('app',['player', 'team','field','ngRoute'])
+angular.module('app',['player', 'team','field','user','ngRoute'])
   .config(function($routeProvider){
 
     $routeProvider.when("/home", {
       templateUrl: 'partials/user/home',
-      topNav: 'partials/user/top-nav.html'
+      topNav: 'partials/user/top-nav.html',
+      controller: 'HomeController'
     });
 
     $routeProvider.otherwise("/home");
 
-    
+
   });
+
+  angular.module('user',[]);

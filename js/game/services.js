@@ -194,3 +194,119 @@ angular.module('team')
 
     return service;
   }]);
+
+angular.module('team')
+  .factory('GamePostService', ['GamePost','Team','Field','TeamService','FieldService',
+  function(GamePost, Team, Field, TeamService, FieldService){
+
+    var service = {};
+    var gamePosts = [];
+
+
+    service.create = function(gamePost){
+      if(gamePost.team&&gamePost.field){
+        gamePost.id = gamePosts.length + 1;
+        gamePosts.push(gamePost);
+      }
+      return gamePosts;
+    };
+
+    service.update = function(gamePost){
+      angular.forEach(gamePosts, function(post, index){
+        if(post.id === gamePost.id){
+          gamePosts[index] = post;
+        }
+      });
+      return gamePost;
+    };
+
+    service.delete = function(gamePostId){
+      var postIndex;
+      angular.forEach(gamePosts, function(post, index){
+        if(post.id == gamePostId){
+          postIndex = index;
+        }
+      });
+      if(postIndex>=0) gamePosts.splice(postIndex, 1);
+    };
+
+    service.getFutureGamePosts = function(teamId, location){
+      var posts = gamePosts.filter(function(post){
+        return post.team.location == location;
+      });
+
+      console.log('Found ' + posts.length + ' game posts in ' + location);
+
+      return posts.filter(function(post){
+        return post.team.id != teamId;
+      });
+    };
+
+
+    var initGamePostings = function(){
+      gamePosts.push(new GamePost({
+        id: 1,
+        team: TeamService.get(1),
+        field: FieldService.getById(1),
+        day: '29/10/2016',
+        time: '21:00'
+      }));
+
+      gamePosts.push(new GamePost({
+        id: 2,
+        team: TeamService.get(1),
+        field: FieldService.getById(2),
+        day: '29/10/2016',
+        time: '21:00'
+      }));
+
+      gamePosts.push(new GamePost({
+        id: 3,
+        team: TeamService.get(1),
+        field: FieldService.getById(1),
+        day: '29/10/2016',
+        time: '21:00'
+      }));
+
+      gamePosts.push(new GamePost({
+        id: 4,
+        team: TeamService.get(2),
+        field: FieldService.getById(2),
+        day: '29/10/2016',
+        time: '21:00'
+      }));
+
+      gamePosts.push(new GamePost({
+        id: 5,
+        team: TeamService.get(2),
+        field: FieldService.getById(1),
+        day: '29/10/2016',
+        time: '21:00'
+      }));
+
+      gamePosts.push(new GamePost({
+        id: 6,
+        team: TeamService.get(2),
+        field: FieldService.getById(2),
+        day: '29/10/2016',
+        time: '21:00'
+      }));
+
+      gamePosts.push(new GamePost({
+        id: 7,
+        team: TeamService.get(1),
+        field: FieldService.getById(1),
+        day: '29/10/2016',
+        time: '21:00'
+      }));
+    };
+
+
+    var init = function(){
+      initGamePostings();
+    };
+
+    init();
+
+    return service;
+  }]);

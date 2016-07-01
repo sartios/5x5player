@@ -82,3 +82,15 @@ angular.module('app')
     }
     return Field;
   });
+
+angular.module('app')
+  .factory('GamePost', function(){
+    function GamePost(args){
+      this.id = args.id,
+      this.field = args.field,
+      this.team = args.team,
+      this.day = args.day,
+      this.time = args.time
+    }
+    return GamePost;
+  });
