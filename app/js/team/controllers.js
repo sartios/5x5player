@@ -73,9 +73,9 @@ angular.module('team').controller('TeamEditController', ['$scope','$location','$
 
 angular.module('team')
   .controller('TeamViewController',['$scope', '$location', 'selectedTeam','PlayerPostService','FieldService',
-  'PlayGameInvitationService','JoinTeamInvitationService',
+  'PlayGameInvitationService','JoinTeamInvitationService','CompanyService',
   function($scope, $location, selectedTeam, PlayerPostService,
-     FieldService, PlayGameInvitationService, JoinTeamInvitationService){
+     FieldService, PlayGameInvitationService, JoinTeamInvitationService, CompanyService){
 
     $scope.update = function(){
       var post = $scope.post;
@@ -99,10 +99,15 @@ angular.module('team')
       $scope.playerInvitations = invitations.length;
     };
 
+    var initAvailableCompanies = function(){
+      $scope.companies = CompanyService.getAll();
+    };
+
     var init = function(){
       $scope.team = selectedTeam;
       initPlayGameInvitations();
       initPlayerInvitations();
+      initAvailableCompanies();
     };
 
     init();

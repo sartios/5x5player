@@ -53,4 +53,12 @@
       <a ng-click="viewPlayerInvitations()">Player invitations: <span class="badge">{{playerInvitations}}</span></a>
     </div>
   </div>
+  <div class="col-sm-2">
+    <form name="formGame" novalidate role="form">
+      <div class="form-group">
+        <label for="companyName">Company:</label>
+        <select ng-model="company.id" ng-option="company.name for company in companies track by company.id"></select>
+      </div>
+    </form>
+  </div>
 </div>
