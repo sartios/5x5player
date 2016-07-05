@@ -16,3 +16,6 @@ angular.module('app',['player', 'team','field','user',
 angular.module('user',[]);
 angular.module('invitation',[]);
 angular.module('game',[]);
+angular.module('field',[]);
+angular.module('team',[]);
+angular.module('player',[]);
