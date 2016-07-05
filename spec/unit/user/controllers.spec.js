@@ -7,7 +7,7 @@ describe("controller:HomeController", function(){
 
   beforeEach(module('app'));
 
-  beforeEach(inject(function($controller){
+  beforeEach(inject(function($controller, PlayGameInvitation, JoinTeamInvitation){
     scope = {};
     gamePost = {id: 1};
     gamePostService = {getFutureGamePosts: function(teamId, location){return [gamePost];}};
@@ -15,27 +15,28 @@ describe("controller:HomeController", function(){
     playerPost = {id: 1};
     playerPostService = {getFuturePlayerPosts: function(location){return [playerPost];}};
     //spyOn(playerPostService, 'getFuturePlayerPosts').and.returnValue(playerPost);
-    joinTeamInvitation = {team: {}, player: {}};
-    joinTeamInvitationService = {create: function(invitation){}};
+    joinTeamInvitationService = {create: function(invitation){
+      joinTeamInvitations.push("1");
+      return {};
+    }};
     teamService = {get: function(id){}};
     playerService = {getById: function(id){}};
     playGameInvitationService = {create: function(invitation){
       playGameInvitations.push("1");
       return {};
     }};
-    playGameInvitation = {gamePost:{}, team: {}};
 
 
     $controller('HomeController', {
       $scope: scope,
       GamePostService: gamePostService,
       PlayerPostService: playerPostService,
-      JoinTeamInvitation: joinTeamInvitation,
+      JoinTeamInvitation: JoinTeamInvitation,
       JoinTeamInvitationService: joinTeamInvitationService,
       TeamService: teamService,
       PlayerService: playerService,
       PlayGameInvitationService: playGameInvitationService,
-      PlayGameInvitation: playGameInvitation
+      PlayGameInvitation: PlayGameInvitation
     });
   }));
 
