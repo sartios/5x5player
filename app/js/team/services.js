@@ -6,6 +6,7 @@ angular.module('team')
 
     service.create = function(team){
       if(team.name){
+        team.id = teams.length + 1;
         teams.push(team);
         return team;
       }
@@ -32,7 +33,10 @@ angular.module('team')
 
     service.getUserTeams = function(userId){
       return teams.filter(function(team){
-        return team.players.indexOf(userId) > -1;
+        var players = team.players.filter(function(player){
+          return player.id == userId;
+        });
+        return players.length > 0;
       });
     };
 
@@ -52,15 +56,14 @@ angular.module('team')
     };
 
     service.getAvailableTeams = function(teamId){
-      console.log('service.getAvailableTeams('+teamId+')');
       var availableTeams=[], team;
       angular.forEach(teams, function(e, index){
-        if(e.id == teamId){
+        if(e.id !== teamId){
           team = angular.copy(teams[index]);
           availableTeams.push(team);
         }
       });
-      return teams;
+      return availableTeams;
     };
 
     var setupInitialTeams = function(){
