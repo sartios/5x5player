@@ -19,7 +19,7 @@ angular.module('team').controller('TeamListController', ['$scope','$location','T
 
   $scope.addTeam = function(){
     $location.path('/team/new');
-  }
+  };
 
   var init = function(){
     $scope.teams = TeamService.getAll();
@@ -28,18 +28,18 @@ angular.module('team').controller('TeamListController', ['$scope','$location','T
   init();
 }]);
 
-angular.module('team').controller('TeamCreateController', ['$scope','TeamService','$location',
- function($scope, TeamService, $location){
+angular.module('team').controller('TeamCreateController', ['$scope','$location','TeamService',
+ function($scope,$location,TeamService){
 
   $scope.createTeam = function(){
     console.log('createTeam()');
     var team = $scope.formNewTeam;
-    team.players = [];
-    team.id = TeamService.getAll().length + 1;
-    team = TeamService.create(team);
-    console.log(team);
     if(team){
-      $location.path('/teams');
+      team.players = [];
+      team = TeamService.create(team);
+      if(team){
+        $location.path('/teams');
+      }
     }
   };
 
