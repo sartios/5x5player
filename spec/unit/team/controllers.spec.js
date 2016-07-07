@@ -250,7 +250,7 @@ describe('Controllers', function(){
     });
 
     it('should not create an undefined field player post', function(){
-      $scope.post = {id : 1, field : field};
+      $scope.post = {id : 1, field : {}};
       $scope.team = {id : 1};
       fieldService.getById.and.returnValue(false);
       $scope.update();
