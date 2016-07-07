@@ -1,18 +1,17 @@
 describe('service:TeamService', function(){
   var team;
-  beforeEach(function(){
-    angular.module('MyMockServices',[])
-      .factory('PlayerService', function(){
+  
+  beforeEach(module(function($provide){
+    $provide.factory('PlayerService', function(){
         var service = {};
         service.getById = function(id){
           return {};
         };
         return service;
       });
-      angular.module('MyTests', ['MyMockServices', 'app']);
-  });
+  }));
 
-  beforeEach(module('MyTests'));
+  beforeEach(module('app'));
 
   it('should create a team',inject(function(TeamService, Team){
       team = new Team({
