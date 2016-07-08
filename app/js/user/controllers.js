@@ -1,3 +1,4 @@
+angular.module('user', []);
 angular.module('user')
   .controller('HomeController', ['$scope','GamePostService','PlayerPostService',
   'JoinTeamInvitation','JoinTeamInvitationService','TeamService','PlayerService',

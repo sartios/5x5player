@@ -93,7 +93,7 @@ angular.module('player')
 
       var setupPositions = function(){
         $scope.positions = PositionService.getAll();
-      }
+      };
 
      var init = function(){
        setupPositions();
