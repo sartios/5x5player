@@ -26,7 +26,8 @@ angular.module('player')
 }]);
 
 angular.module('player')
-  .controller('PlayerListController', ['$scope', '$location', 'PlayerService', function($scope,$location, PlayerService){
+  .controller('PlayerListController', ['$scope', '$location', 'PlayerService',
+  function($scope,$location, PlayerService){
 
     $scope.createPlayer = function(){
       $location.path('/player/new');
@@ -88,7 +89,7 @@ angular.module('player')
           console.log(player.id);
           PlayerService.update(player);
         }
-        $location.path('players');
+        $location.path('/players');
       };
 
       var setupPositions = function(){
