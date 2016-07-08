@@ -93,9 +93,10 @@ angular.module('player')
     };
 
     service.getById = function(positionId){
-      return positions.filter(function(position){
+      var results = positions.filter(function(position){
         return position.id == positionId;
       });
+      return (results.length > 0)?results[0]:undefined;
     };
 
     service.getAll = function(){

@@ -74,6 +74,56 @@ describe('player.services', function(){
     it('should return all players', inject(function(PlayerService){
       expect(PlayerService.getAll().length).toEqual(3);
     }));
-
   });
+
+  describe('PositionService', function(){
+    it('should return an array of positions with the same label',
+     inject(function(PositionService, Position){
+      var position = new Position({
+        label : 'sample label'
+      });
+      PositionService.getAll().push(position);
+      expect(PositionService.getByLabel(position.label)).toEqual([position]);
+    }));
+
+    it('should return an empty array when positions with the label does not exist',
+     inject(function(PositionService, Position){
+      var position = new Position({
+        label : 'sample label'
+      });
+      expect(PositionService.getByLabel(position.label)).toEqual([]);
+    }));
+
+    it('should return a position with the id', inject(function(PositionService, Position){
+       var position = new Position({
+         id : 123,
+         label : 'sample label'
+       });
+       PositionService.getAll().push(position);
+       expect(PositionService.getById(position.id)).toEqual(position);
+    }));
+
+    it('should return undefined if a position with the id does not exist',
+    inject(function(PositionService, Position){
+       var position = new Position({
+         id : 123,
+         label : 'sample label'
+       });
+       expect(PositionService.getById(position.id)).toBeFalsy();
+    }));
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
