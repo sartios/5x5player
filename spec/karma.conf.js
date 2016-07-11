@@ -24,6 +24,7 @@ module.exports = function(config) {
       'app/js/team/*.js',
       'app/js/field/*.js',
       'app/js/invitation/*.js',
+      'app/js/joinTeam/*.js',
       'app/js/game/*.js',
       'app/js/app.js',
       'app/js/root.js',
