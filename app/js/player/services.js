@@ -139,7 +139,7 @@ angular.module('player')
     service.create = function(playerPost){
       if(playerPost.team&&playerPost.playersNeeded){
         playerPost.id = playerPosts.length + 1;
-        playerPosts.push(playerPost);
+        playerPosts.push(angular.copy(playerPost));
       }else{
         console.log('Please check team or playersNeeded');
       }
@@ -147,14 +147,15 @@ angular.module('player')
     };
 
     service.update = function(playerPost){
-      angular.forEach(playerPosts, function(e, index){
-        if(e.id === playerPost.id){
-          playerPosts[index] = playerPost;
-        }
-      });
-      return playerPost;
+    	if(playerPost.team&&playerPost.playersNeeded){
+	      angular.forEach(playerPosts, function(e, index){
+	        if(e.id === playerPost.id){
+	          playerPosts[index] = playerPost;
+	        }
+	      });
+  		}
+    	return playerPost;
     };
-
 
     service.delete = function(playerPostId){
         var postIndex;
@@ -167,9 +168,41 @@ angular.module('player')
         if(postIndex >= 0) playerPosts.splice(postIndex, 1);
     };
 
+    service.getAll = function(){
+    	return playerPosts;
+    }
+
+    service.getById = function(postId){
+    	var post;
+    	angular.forEach(playerPosts, function(e, index){
+    		if(e.id == postId){
+    			post = angular.copy(playerPosts[index]);
+    		}
+    	});
+    	return post;
+    };
+
     service.getFuturePlayerPosts = function(location){
-      return playerPosts.filter(function(post){
+      var locationPosts = playerPosts.filter(function(post){
         return post.team.location == location;
+      }),
+      currentDate = new Date();
+
+      return locationPosts.filter(function(post){
+      	var date = post.day.split('/'),
+      	time = post.time.split(':'),
+      	timeIsOk;
+      	
+      	if(time[0] > currentDate.getHours()){
+      		timeIsOk = true;
+      	}else if(time[0] == currentDate.getHours()){
+      		timeIsOk = time[1] >= currentDate.getMinutes();
+      	}
+      	
+      	return (date[0] >= currentDate.getDate())
+      		&&(date[1] >= currentDate.getMonth() + 1)
+      		&&(date[2] >= currentDate.getFullYear()) 
+      		&&timeIsOk;
       });
     };
 

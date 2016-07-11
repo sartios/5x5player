@@ -114,7 +114,171 @@ describe('player.services', function(){
   });
 
 
+  describe('PlayerPostService', function(){
+    it('should create a player post',
+    inject(function(PlayerPostService, PlayerPost){
+      var post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+        team : {name: 'sample team'},
+      }));
+      var actualPost = PlayerPostService.getById(post.id);
+      expect(post).toEqual(actualPost);
+    }));
 
+    it('should not create a player post without the number of missing players',
+    inject(function(PlayerPostService, PlayerPost){
+      var sizeOfPosts = PlayerPostService.getAll().length;
+      var post = PlayerPostService.create(new PlayerPost({
+        team : {name: 'sample team'},
+      }));
+      expect(post.id).toBeFalsy();
+      expect(sizeOfPosts).toEqual(PlayerPostService.getAll().length);
+    }));
+
+    it('should not create a player post without the team',
+    inject(function(PlayerPostService, PlayerPost){
+      var sizeOfPosts = PlayerPostService.getAll().length;
+      var post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+      }));
+      expect(post.id).toBeFalsy();
+      expect(sizeOfPosts).toEqual(PlayerPostService.getAll().length);
+    }));
+
+    it('should update a player post',
+    inject(function(PlayerPostService, PlayerPost){
+      var post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+        team : {name: 'sample team'},
+      }));
+      post.playersNeeded = 5;
+      post.team.name = 'modified sample team';
+      PlayerPostService.update(post);
+      var actualPost = PlayerPostService.getById(post.id);
+      expect(post).toEqual(actualPost);
+    }));
+
+    it('should not update a player post without the number of missing players',
+    inject(function(PlayerPostService, PlayerPost){
+      var post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+        team : {name: 'sample team'},
+      }));
+      delete post.playersNeeded;
+      post.team.name = 'modified sample team';
+      PlayerPostService.update(post);
+      var actualPost = PlayerPostService.getById(post.id);
+      expect(actualPost.playersNeeded).toEqual(2);
+      expect(actualPost.team.name).toEqual('sample team');
+    }));
+
+    it('should not update a player post without the team',
+    inject(function(PlayerPostService, PlayerPost){
+      var post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+        team : {name: 'sample team'},
+      }));
+      post.playersNeeded = 5;
+      delete post.team;
+      PlayerPostService.update(post);
+      var actualPost = PlayerPostService.getById(post.id);
+      expect(actualPost.playersNeeded).toEqual(2);
+      expect(actualPost.team.name).toEqual('sample team');
+    }));
+
+    it('should not update when the player does not exist',
+    inject(function(PlayerPostService, PlayerPost){
+      var post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+        team : {name: 'sample team'},
+      }));
+      post.id = post.id + 1;
+      PlayerPostService.update(post);
+      var actualPost = PlayerPostService.getById(post.id);
+      expect(actualPost).toBeFalsy();
+    }));
+
+    it('should delete player post',
+    inject(function(PlayerPostService, PlayerPost){
+      var post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+        team : {name: 'sample team'},
+      }));
+      PlayerPostService.delete(post.id);
+      var actualPost = PlayerPostService.getById(post.id);
+      expect(actualPost).toBeFalsy();
+    }));
+
+    it('should not delete player post if does not exist',
+    inject(function(PlayerPostService, PlayerPost){
+      var post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+        team : {name: 'sample team'},
+      }));
+      var size = PlayerPostService.getAll().length;
+      PlayerPostService.delete(post.id + 1);
+      expect(size).toEqual(PlayerPostService.getAll().length);
+    }));
+
+    it('should return a post by ID',
+    inject(function(PlayerPostService, PlayerPost){
+      var post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+        team : {name: 'sample team'},
+      }));
+      var actualPost = PlayerPostService.getById(post.id);
+      expect(post).toEqual(actualPost);
+    }));
+
+    it('should not return a post when ID does not exist',
+    inject(function(PlayerPostService, PlayerPost){
+      var post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+        team : {name: 'sample team'},
+      }));
+      var actualPost = PlayerPostService.getById(post.id + 10);
+      expect(actualPost).toBeFalsy();
+    }));
+
+    it('should return players posts with future date',
+    inject(function(PlayerPostService, PlayerPost){
+      var post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+        team : {name: 'sample team', location: 'Thessaloniki'},
+        day: '25/08/2016',
+        time: '21:00'
+      }));
+      post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+        team : {name: 'sample team', location: 'Thessaloniki'},
+        day: '25/05/2016',
+        time: '21:00'
+      }));
+      var posts = PlayerPostService.getFuturePlayerPosts(post.team.location);
+      expect(posts.length).toEqual(1);
+    }));
+
+    it('should return players posts with now date',
+    inject(function(PlayerPostService, PlayerPost){
+      var currentDate = new Date(),
+      day = currentDate.getDate() + "/" + currentDate.getMonth() +1 + "/" + currentDate.getFullYear();
+      var post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+        team : {name: 'sample team', location: 'Thessaloniki'},
+        day: day,
+        time: '01:00'
+      }));
+      post = PlayerPostService.create(new PlayerPost({
+        playersNeeded : 2,
+        team : {name: 'sample team', location: 'Thessaloniki'},
+        day: day,
+        time: '21:00'
+      }));
+      var posts = PlayerPostService.getFuturePlayerPosts(post.team.location);
+      expect(posts.length).toEqual(1);
+    }));
+
+  });
 
 
 
