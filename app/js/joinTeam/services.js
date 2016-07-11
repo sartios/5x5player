@@ -7,28 +7,44 @@ function(Team, Player, JoinTeamInvitation){
   service.create = function(invitation){
     if(invitation.team && invitation.player){
       invitation.id = invitations.length + 1;
-      invitations.push(invitation);
+      invitations.push(angular.copy(invitation));
     }
     return invitation;
   };
 
   service.update = function(invitation){
-    angular.forEach(invitations, function(e, index){
-      if(e.id === invitation.id){
-        invitations[index] = invitation;
-      }
-    });
+    if(invitation.team && invitation.player){
+        angular.forEach(invitations, function(e, index){
+        if(e.id === invitation.id){
+          invitations[index] = angular.copy(invitation);
+        }
+      });
+    }
     return invitation;
   };
 
   service.delete = function(invitation){
-    var invitationIndex;
+    var invitationIndex = 0;
     angular.forEach(invitations, function(e, index){
       if(e.id === invitation.id){
         invitationIndex = index;
       }
     });
     if(invitationIndex>=0) invitations.splice(invitationIndex,1);
+  };
+
+  service.getAll = function(){
+    return invitations;
+  };
+
+  service.getById = function(invitationId){
+    var invitation;
+    angular.forEach(invitations, function(e, index){
+      if(e.id == invitationId){
+        invitation = angular.copy(invitations[index]);
+      }
+    });
+    return invitation;
   };
 
   service.getByTeam = function(teamId){
